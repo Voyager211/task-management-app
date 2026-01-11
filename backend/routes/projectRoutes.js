@@ -1,0 +1,26 @@
+import express from 'express';
+import {
+  createProject,
+  getProjects,
+  getProject,
+  updateProject,
+  deleteProject
+} from '../controllers/projectController.js';
+import { protect } from '../middleware/auth.js';
+
+const router = express.Router();
+
+router.use(protect);
+
+// /api/projects
+router.route('/')
+  .get(getProjects)
+  .post(createProject);
+
+// /api/projects/:id
+router.route('/:id')
+  .get(getProject) 
+  .put(updateProject)    
+  .delete(deleteProject); 
+
+export default router;
