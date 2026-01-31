@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../utils/api';
 
 export const AuthContext = createContext();
 
@@ -41,11 +41,11 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const { data } = await axios.post(
-        'http://localhost:5000/api/auth/register',
-        { name, email, password },
-        { withCredentials: true }
-      );
+      const { data } = await API.post('/auth/register', {
+        name,
+        email,
+        password
+      });
 
       console.log('Backend response:', data);
 
@@ -73,11 +73,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const { data } = await axios.post(
-        'http://localhost:5000/api/auth/login',
-        { email, password },
-        { withCredentials: true }
-      );
+      const { data } = await API.post('/auth/login', {
+        email,
+        password
+      });
 
       console.log('Login response:', data);
 
@@ -105,11 +104,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post(
-        'http://localhost:5000/api/auth/logout',
-        {},
-        { withCredentials: true }
-      );
+      await API.post('/auth/logout', {});
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
