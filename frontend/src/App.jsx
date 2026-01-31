@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard';
 import ProjectDetail from './pages/ProjectDetail';
 import Profile from './pages/Profile';
 
+const APP_VERSION = '1.0.1'; // Force rebuild
+
 function App() {
   return (
     <Router>
